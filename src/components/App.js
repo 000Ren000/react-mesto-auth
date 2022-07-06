@@ -10,23 +10,19 @@ import {api} from '../utils/Api.js';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.js'
 import EditAvatarPopup from './EditAvatarPopup.js';
 import AddPlacePopup from './AddPlacePopup.js';
+import {
+	BrowserRouter,
+	Routes,
+	Route,
+} from "react-router-dom";
 
 function App() {
 
+	//Стейты
 	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 	const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 	const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
-
-	const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
-	const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
-	const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
-	const closeAllPopups = () => {
-		setEditAvatarPopupOpen(false);
-		setIsEditProfilePopupOpen(false);
-		setAddPlacePopupOpen(false);
-		setSelectedCard({name: '', link: ''});
-	}
 	const [currentUser, setCurrentUser] = useState({
 		myID: '',
 		about: '',
@@ -34,11 +30,36 @@ function App() {
 		cohort: '',
 		name: ''
 	})
+	const [cards, setCards] = useState([]);
+
+	//Эффекты
 	useEffect(() => {
 		api.getUserInfo().then(setCurrentUser
 		).catch(err => console.log('что-то пошло не так', err));
-	}, []);
+	}, []); //Получение данных о пользователе
 
+	useEffect(() => {
+		api.getCardInfo().then(data => {
+			setCards(data.map(item => ({...item, key: item._id})
+			));
+		})
+				.catch(err => console.log('что-то пошло не так', err));
+	}, []); //Получение карточек с картинками
+
+	//Клики кнопок
+	const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
+	const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
+	const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
+
+
+	const closeAllPopups = () => {
+		setEditAvatarPopupOpen(false);
+		setIsEditProfilePopupOpen(false);
+		setAddPlacePopupOpen(false);
+		setSelectedCard({name: '', link: ''});
+	} //Закрытие попапов
+
+  //Обновление данных пользователя
 	const handleUpdateUser = (data) => {
 		api.setUserInfo(data).then(setCurrentUser)
 				.catch(err => console.log('что-то пошло не так', err));
@@ -48,17 +69,7 @@ function App() {
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
-	//Получение массива с карточками
-	const [cards, setCards] = useState([]);
-	useEffect(() => {
-		api.getCardInfo().then(data => {
-			setCards(data.map(item => ({...item, key: item._id})
-			));
-		})
-				.catch(err => console.log('что-то пошло не так', err));
-	}, []);
-
-
+	//Кнопки для карточек
 	function handleCardLike(card) {
 		// Снова проверяем, есть ли уже лайк на этой карточке
 		const isLiked = card.likes.some(i => i._id === currentUser._id);
@@ -69,7 +80,6 @@ function App() {
 		})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
-
 	function handleAddPlaceSubmit (data) {
 		api.setNewCardInfo(data).then(newCard => {
 			setCards([newCard, ...cards])
@@ -82,45 +92,59 @@ function App() {
 		})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
+
+
 	return (
-			<CurrentUserContext.Provider value={currentUser}>
-					<div className='root'>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={
+						<CurrentUserContext.Provider value={currentUser}>
+							<div className='root'>
 
-						<Header/>
+								<Header/>
 
-						<Main onEditProfile={handleEditProfileClick}
-						      onAddPlace={handleAddPlaceClick}
-						      onEditAvatar={handleEditAvatarClick}
-						      onCardClick={setSelectedCard}
-						      cards={cards}
-						      onCardLike={handleCardLike}
-						      onCardDelete={handleCardDelete}
-						/>
-						<Footer/>
-						<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
-						                  onUpdateUser={handleUpdateUser}
-						/>
+								<Main onEditProfile={handleEditProfileClick}
+								      onAddPlace={handleAddPlaceClick}
+								      onEditAvatar={handleEditAvatarClick}
+								      onCardClick={setSelectedCard}
+								      cards={cards}
+								      onCardLike={handleCardLike}
+								      onCardDelete={handleCardDelete}
+								/>
+								<Footer/>
+								<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
+								                  onUpdateUser={handleUpdateUser}
+								/>
 
-						<AddPlacePopup isOpen={isAddPlacePopupOpen}
-						               onClose={closeAllPopups}
-						               onAddPlace={handleAddPlaceSubmit}
-						/>
+								<AddPlacePopup isOpen={isAddPlacePopupOpen}
+								               onClose={closeAllPopups}
+								               onAddPlace={handleAddPlaceSubmit}
+								/>
 
-						<EditAvatarPopup isOpen={isEditAvatarPopupOpen}
-						                 onClose={closeAllPopups}
-						                 onUpdateAvatar={handleUpdateAvatar}
-						/>
+								<EditAvatarPopup isOpen={isEditAvatarPopupOpen}
+								                 onClose={closeAllPopups}
+								                 onUpdateAvatar={handleUpdateAvatar}
+								/>
 
 
-						<PopupWithForm title="Вы уверены?" name='add-Form'
-						               onClose={closeAllPopups}
-						               buttonText="Да"
-						/>
+								<PopupWithForm title="Вы уверены?" name='add-Form'
+								               onClose={closeAllPopups}
+								               buttonText="Да"
+								/>
 
-						<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+								<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
 
-					</div>
-			</CurrentUserContext.Provider>
+							</div>
+						</CurrentUserContext.Provider>
+					}/>
+					<Route path="/sign-up" element={
+						<div className="auth">Log Up</div>
+					} />
+					<Route path="/sign-in" element={
+						<div className="auth">Log In</div>
+					} />
+				</Routes>
+			</BrowserRouter>
 	);
 }
 
