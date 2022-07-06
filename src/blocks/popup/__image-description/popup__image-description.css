@@ -1,0 +1,10 @@
+.popup__image-description {
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+
+  color: #FFFFFF;
+  margin: 10px 0 0;
+}

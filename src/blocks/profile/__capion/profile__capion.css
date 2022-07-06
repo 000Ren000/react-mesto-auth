@@ -1,0 +1,15 @@
+.profile__capion {
+  max-width: calc(100% - 18px - 24px - 10px);
+  display: flex;
+  flex-flow: wrap column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-right: 18px;
+}
+@media screen and (max-width: 589px) {
+  .profile__capion {
+    margin: 23px 7px 0px 26px;
+    align-items: center;
+    max-width: calc(100% - 85px);
+  }
+}
