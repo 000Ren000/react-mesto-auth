@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1801da3a-ce6d-46ff-9811-66df60a170ed" name="Changes" comment="" />
+    <list default="true" id="1801da3a-ce6d-46ff-9811-66df60a170ed" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1657100725461</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="+">
+      <created>1657100881076</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1657100881076</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +136,7 @@
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Перенес старый проект" />
     <MESSAGE value="add / Со" />
-    <option name="LAST_COMMIT_MESSAGE" value="add / Со" />
+    <MESSAGE value="+" />
+    <option name="LAST_COMMIT_MESSAGE" value="+" />
   </component>
 </project>
