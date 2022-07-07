@@ -1,0 +1,49 @@
+.authorization {
+    display: flex;
+    min-height: 100vh;
+    max-width: 358px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.authorization__form {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 15% 60% 25%;
+}
+
+.authorization__title {
+    padding-top: 60px;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 24px;
+    line-height: 29px;
+    text-align: center;
+}
+
+.authorization__inputs {
+
+}
+.authorization__input {
+    margin-top: 30px;
+    width: 100%;
+    min-height: 27px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+
+}
+.authorization__input::placeholder {
+    color: #CCCCCC;
+}
+.authorization__buttons {
+}
