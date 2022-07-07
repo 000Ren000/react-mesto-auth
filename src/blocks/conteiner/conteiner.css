@@ -1,0 +1,13 @@
+.conteiner {
+  box-sizing: border-box;
+  max-width: 880px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+@media screen and (max-width: 880px) {
+  .conteiner {
+    max-width: 90%;
+  }
+}

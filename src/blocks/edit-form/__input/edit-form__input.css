@@ -1,0 +1,20 @@
+.edit-form__input {
+  padding: 0;
+  width: 100%;
+  min-height: 38px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+  font-family: Inter, 'Helvetica Neue', Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  color: #000000;
+}
+
+@media screen and (max-width: 320px) {
+  .edit-form__input:last-of-type {
+    margin-bottom: 44px;
+  }
+}

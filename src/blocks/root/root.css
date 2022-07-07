@@ -1,0 +1,13 @@
+.root {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  color: #fff;
+  min-height: 100vh;
+  justify-content: space-between;
+}
