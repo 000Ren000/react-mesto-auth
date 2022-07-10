@@ -1,10 +1,10 @@
-export function Register({title}) {
+export function Login() {
 
 	return (
 			<div className="authorization">
 				<form action="" className="authorization__form">
-					<div className="authorization__title">{title}</div>
-					<div className="authorization__inputs">
+					<div className="authorization__title">Вход</div>
+					<div className="authorization__inputs-container">
 						<input
 								type="text"
 								className="authorization__input"
@@ -16,7 +16,9 @@ export function Register({title}) {
 								placeholder="Пароль"
 						/>
 					</div>
-					<div className="authorization__buttons"></div>
+					<div className="authorization__buttons-container">
+						<button className="authorization__button">Войти</button>
+					</div>
 				</form>
 			</div>
 	)

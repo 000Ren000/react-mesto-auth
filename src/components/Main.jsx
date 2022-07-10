@@ -1,6 +1,6 @@
 import {useContext} from 'react';
-import Cards from './Card.js';
-import {CurrentUserContext} from '../contexts/CurrentUserContext.js';
+import Cards from './Card.jsx';
+import {CurrentUserContext} from '../contexts/CurrentUserContext.jsx';
 
 export default function Main(
 		{

@@ -1,4 +1,4 @@
-import PopupWithForm from './PopupWithForm.js';
+import PopupWithForm from './PopupWithForm.jsx';
 import {useEffect, useState} from 'react';
 
 export default function AddPlacePopup (

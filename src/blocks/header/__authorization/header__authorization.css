@@ -1,0 +1,21 @@
+.header__authorization {
+    justify-self: flex-end;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+
+
+    text-align: right;
+
+    color: #FFFFFF;
+}
+@media screen and (max-width: 320px) {
+    .header__authorization {
+        margin-right: 30px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
