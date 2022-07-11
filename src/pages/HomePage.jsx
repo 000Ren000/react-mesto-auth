@@ -1,14 +1,14 @@
-import {CurrentUserContext} from '../../contexts/CurrentUserContext.jsx';
-import Header from '../Header.jsx';
-import Main from '../Main.jsx';
-import Footer from '../Footer.jsx';
-import EditProfilePopup from '../EditProfilePopup.jsx';
-import AddPlacePopup from '../AddPlacePopup.jsx';
-import EditAvatarPopup from '../EditAvatarPopup.jsx';
-import PopupWithForm from '../PopupWithForm.jsx';
-import ImagePopup from '../ImagePopup.jsx';
+import {CurrentUserContext} from '../contexts/CurrentUserContext.jsx';
+import Header from '../components/Header.jsx';
+import Main from '../components/Main.jsx';
+import Footer from '../components/Footer.jsx';
+import EditProfilePopup from '../components/EditProfilePopup.jsx';
+import AddPlacePopup from '../components/AddPlacePopup.jsx';
+import EditAvatarPopup from '../components/EditAvatarPopup.jsx';
+import PopupWithForm from '../components/PopupWithForm.jsx';
+import ImagePopup from '../components/ImagePopup.jsx';
 import {useEffect, useState} from 'react';
-import {api} from '../../utils/Api.js';
+import {api} from '../utils/Api.js';
 
 
 export function HomePage() {
