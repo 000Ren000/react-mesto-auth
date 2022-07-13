@@ -17,7 +17,10 @@ export const AuthProvider = ({children}) => {
 		forwardIn();
 	}
 	const signOut = (forwardOut) => {
-
+		setUserInfo({
+			...userInfo,
+			loggedIn: false
+		})
 		forwardOut();
 	}
 	const value = {

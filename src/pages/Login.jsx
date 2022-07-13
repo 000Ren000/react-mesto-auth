@@ -27,16 +27,18 @@ export function Login() {
 					<div className="authorization__title">Вход</div>
 					<div className="authorization__inputs-container">
 						<input
-								type="text"
+								type="email"
 								className="authorization__input"
 								placeholder="Email"
 								name="email"
+								required
 						/>
 						<input
 								type="password"
 								className="authorization__input"
 								placeholder="Пароль"
 								name="password"
+								required
 						/>
 					</div>
 					<div className="authorization__buttons-container">

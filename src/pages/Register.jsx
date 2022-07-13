@@ -1,24 +1,48 @@
 import {Link, useNavigate, useLocation} from 'react-router-dom'
 import {useAuth} from '../utils/useAuth.js';
+import {auth} from '../utils/auth.js';
 
 
 export function Register() {
 	const {signIn} = useAuth();
-	const location = useLocation();
 	const navigate = useNavigate();
-	const fromPage = location.state?.from?.pathname || '/';
-	// const fromPage =  '/';
+
+	const createAccaunt = (email, password) => {
+		auth.signUp(email, password)
+				.then(data => {
+							console.log(data);
+				}).catch(err => console.log('что-то пошло не так', err))
+	}
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target;
-		signIn({
-			email: form.email.value,
-			password: form.password.value,
-			loggedIn: false,
-			userInOutButton: 'Login',
-			path: '/sign-in'
-		}, () => navigate(fromPage, {replace: true}))
+		const email = form.email.value
+		const password = form.password.value;
+
+		auth.signUp(email, password)
+				.then(data => {
+					console.log(data);
+					signIn({
+						email: data.email,
+						password: data.password,
+						loggedIn: true,
+						userInOutButton: 'Выход',
+						path: '/'
+					}, () => navigate("/", {replace: true}));
+				}).catch(err => {
+			console.log('что-то пошло не так', err)
+			signIn({
+				email: '',
+				password: '',
+				loggedIn: false,
+				userInOutButton: 'Вход',
+				path: '/'
+			}, () => navigate("/", {replace: true}));
+		})
+
+
+
 	}
 	return (
 			<div className="authorization">
@@ -26,16 +50,21 @@ export function Register() {
 					<div className="authorization__title">Регистрация</div>
 					<div className="authorization__inputs-container">
 						<input
-								type="text"
+								type="email"
 								className="authorization__input"
 								placeholder="Email"
 								name="email"
+								required
+
 						/>
 						<input
 								type="password"
 								className="authorization__input"
 								placeholder="Пароль"
 								name="password"
+								required
+
+
 						/>
 					</div>
 					<div className="authorization__buttons-container">
