@@ -1,0 +1,23 @@
+.authorization__input {
+    margin-top: 30px;
+    width: 100%;
+    min-height: 27px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #FFFFFF;
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+}
+.authorization__input::placeholder {
+    font-family: 'Inter', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+
+    color: #CCCCCC;
+}

@@ -8,89 +8,8 @@
     box-sizing: border-box;
 }
 
-
-
-.authorization__title {
-    padding-top: 60px;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 900;
-    font-size: 24px;
-    line-height: 29px;
-    text-align: center;
-}
-
-.authorization__inputs-container {
-    margin-top: 50px;
-}
-.authorization__input {
-    margin-top: 30px;
-    width: 100%;
-    min-height: 27px;
-    background: none;
-    border: none;
-    border-bottom: 1px solid #FFFFFF;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    color: #FFFFFF;
-
-}
-.authorization__input::placeholder {
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-
-    color: #CCCCCC;
-}
-.authorization__buttons-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-.authorization__button {
-    min-height: 50px;
-    background-color: #FFFFFF;
-    border: none;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    color: #000000;
-    transition: opacity 0.18s ease-in-out;
-}
-.authorization__button:hover {
-    opacity: .85;
-}
-.authorization__link {
-    margin-top: 15px;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 17px;
-    text-align: center;
-
-    color: #FFFFFF;
-}
-
-
 @media screen and (max-width: 358px) {
     .authorization {
         max-width: 260px;
-    }
-
-    .authorization__button {
-        min-height: 46px;
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
     }
 }

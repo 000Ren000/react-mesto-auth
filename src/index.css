@@ -82,6 +82,13 @@
 
 /*authorization*/
 @import url('./blocks/authorization/authorization.css');
+@import url('./blocks/authorization/__button/authorization__button.css');
+@import url('./blocks/authorization/__buttons-container/authorization__buttons-container.css');
+@import url('./blocks/authorization/__form/authorization__form.css');
+@import url('./blocks/authorization/__input/authorization__input.css');
+@import url('./blocks/authorization/__inputs-container/authorization__inputs-container.css');
+@import url('./blocks/authorization/__link/authorization__link.css');
+@import url('./blocks/authorization/__title/authorization__title.css');
 body {
     background-color: #000;
 }
