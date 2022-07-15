@@ -1,50 +1,74 @@
 import {useAuth} from '../utils/useAuth.js';
-import {useLocation, useNavigate} from "react-router-dom";
+import {auth} from '../utils/auth.js';
+import InfoTooltip from '../components/InfoTooltip.jsx';
+import {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 export function Login() {
 
 	const navigate = useNavigate();
-	const location = useLocation();
 	const {signIn} = useAuth();
-	const fromPage = location.state?.from?.pathname || '/';
-
+	const [acceptMessage, setAcceptMessage] = useState(false);
+	const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
+	const closePopup = () => {
+		setIsInfoTooltipOpened(false);
+		if (acceptMessage) navigate("/");
+	}
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target;
-		signIn(
-				{
-					email: form.email.value,
-					password: form.password.value,
-					loggedIn: true,
-					userInOutButton: 'Registration',
-					path: '/sign-up'
-				},() => navigate(fromPage, {replace: true}));
+		const email = form.email.value
+		const password = form.password.value;
 
+		auth.signIn(email, password)
+				.then(({token}) => {
+					auth.checkToken(token)
+							.then(({data}) => {
+								signIn(data);
+								setAcceptMessage(true);
+								setIsInfoTooltipOpened(true);
+							})
+					localStorage.setItem('JWT', token);
+				}).catch(err => {
+			console.log('Вход не выполнен! Так как ', err);
+			setAcceptMessage(false);
+			setIsInfoTooltipOpened(true);
+		});
 	}
+
+
+
 	return (
-			<div className="authorization">
-				<form action="src/pages/Login.jsx" className="authorization__form" onSubmit={handleSubmit}>
-					<div className="authorization__title">Вход</div>
-					<div className="authorization__inputs-container">
-						<input
-								type="email"
-								className="authorization__input"
-								placeholder="Email"
-								name="email"
-								required
-						/>
-						<input
-								type="password"
-								className="authorization__input"
-								placeholder="Пароль"
-								name="password"
-								required
-						/>
-					</div>
-					<div className="authorization__buttons-container">
-						<button className="authorization__button">Войти</button>
-					</div>
-				</form>
-			</div>
+			<>
+				<InfoTooltip isOpen={isInfoTooltipOpened}
+				             typeMessage={acceptMessage}
+				             onClose={closePopup}
+				/>
+				<div className="authorization">
+					<form action="src/pages/Login.jsx" className="authorization__form" onSubmit={handleSubmit}>
+						<div className="authorization__title">Вход</div>
+						<div className="authorization__inputs-container">
+							<input
+									type="email"
+									className="authorization__input"
+									placeholder="Email"
+									name="email"
+									required
+							/>
+							<input
+									type="password"
+									className="authorization__input"
+									placeholder="Пароль"
+									name="password"
+									autoComplete="on"
+									required
+							/>
+						</div>
+						<div className="authorization__buttons-container">
+							<button className="authorization__button">Войти</button>
+						</div>
+					</form>
+				</div>
+			</>
 	)
 }

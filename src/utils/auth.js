@@ -19,7 +19,10 @@ class Auth {
 				"email": email
 			})
 		})
-				.then(res => this._checkResponse(res));
+				.then(res => {
+					if (res.status === 400) return Promise.reject(`возможно неправильно введен email`);
+					this._checkResponse(res)
+				});
 	}
   // Вход
 	signIn(email, password) {
@@ -31,7 +34,11 @@ class Auth {
 				"email": email
 			})
 		})
-				.then(res => this._checkResponse(res));
+				.then(res => {
+					if (res.status === 400) return Promise.reject(`Не передано одно из полей`)
+					else if (res.status === 401) return Promise.reject(`email или пароль введены неверно!`)
+					else return this._checkResponse(res);
+				});
 	}
 
 	//Проверка токена

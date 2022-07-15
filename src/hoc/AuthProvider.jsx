@@ -1,27 +1,32 @@
-import {createContext, useState} from 'react';
+import {createContext, useEffect, useState} from 'react';
+import {auth} from '../utils/auth.js';
+import {useNavigate} from 'react-router-dom';
+
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({children}) => {
-	const [userInfo, setUserInfo] = useState(
-			{
-				email: '',
-				password: '',
-				loggedIn: false,
-				userInOutButton: 'Войти',
-				path: '/sign-in'
-			});
-	const {loggedIn} = userInfo;
-	const signIn = (newUser, forwardIn) => {
-		setUserInfo(newUser);
-		console.log(userInfo);
-		forwardIn();
-	}
-	const signOut = (forwardOut) => {
-		setUserInfo({
-			...userInfo,
-			loggedIn: false
+	const [loggedIn, setLoggedIn] = useState(false);
+	const navigate = useNavigate();
+	// useEffect(() => !loggedIn ? navigate("/sign-in") : navigate('/'), [loggedIn])
+	const JWT = localStorage.getItem('JWT');
+	const [userInfo, setUserInfo] = useState({_id: '', email: ''});
+	useEffect(() => {
+		if (!JWT) return;
+		auth.checkToken(JWT)
+				.then(({data}) => {
+					setUserInfo(data);
+					setLoggedIn(true);
+				}).catch(err => {
+			console.log('Проблемы с авторизацией', err);
 		})
-		forwardOut();
+	}, [])
+	const signIn = (newUser) => {
+		setUserInfo(newUser);
+		setLoggedIn(true);
+	}
+	const signOut = () => {
+		localStorage.removeItem('JWT');
+		setLoggedIn(false);
 	}
 	const value = {
 		userInfo,

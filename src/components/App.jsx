@@ -1,4 +1,3 @@
-import {useState} from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {HomePage} from '../pages/HomePage.jsx';
 import {Register} from '../pages/Register.jsx';

@@ -59,6 +59,8 @@
 @import url('./blocks/edit-form/__input/_type/edit-form__input_type_name.css');
 @import url('./blocks/edit-form/__input/_type/edit-form__input_type_profession.css');
 @import url('./blocks/edit-form/__title/_minimize/edit-form__title_minimize.css');
+@import url('./blocks/edit-form/__message/edit-form__message.css');
+@import url('./blocks/edit-form/__image/edit-form__image.css');
 
 /* popap */
 @import url('./blocks/popup/popup.css');

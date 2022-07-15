@@ -1,19 +1,10 @@
-import {Link, useNavigate, useLocation} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import {useAuth} from '../utils/useAuth.js';
 import {auth} from '../utils/auth.js';
 
 
 export function Register() {
 	const {signIn} = useAuth();
-	const navigate = useNavigate();
-
-	const createAccaunt = (email, password) => {
-		auth.signUp(email, password)
-				.then(data => {
-							console.log(data);
-				}).catch(err => console.log('что-то пошло не так', err))
-	}
-
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target;
@@ -21,29 +12,12 @@ export function Register() {
 		const password = form.password.value;
 
 		auth.signUp(email, password)
-				.then(data => {
+				.then(({data}) => {
 					console.log(data);
-					signIn({
-						email: data.email,
-						password: data.password,
-						loggedIn: true,
-						userInOutButton: 'Выход',
-						path: '/'
-					}, () => navigate("/", {replace: true}));
-				}).catch(err => {
-			console.log('что-то пошло не так', err)
-			signIn({
-				email: '',
-				password: '',
-				loggedIn: false,
-				userInOutButton: 'Вход',
-				path: '/'
-			}, () => navigate("/", {replace: true}));
-		})
+					// signIn(data)
+				}).catch(err => console.log('что-то пошло не так', err))
+		}
 
-
-
-	}
 	return (
 			<div className="authorization">
 				<form action="src/pages/Register.jsx" className="authorization__form" onSubmit={handleSubmit}>
@@ -63,6 +37,7 @@ export function Register() {
 								placeholder="Пароль"
 								name="password"
 								required
+								autoComplete="on"
 
 
 						/>
