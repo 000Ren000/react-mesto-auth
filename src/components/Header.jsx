@@ -4,7 +4,7 @@ import {useAuth} from '../utils/useAuth.js';
 
 
 export default function Header() {
-	const {userInfo, signOut, loggedIn} = useAuth();
+	const {userInfo, onSignOut, loggedIn} = useAuth();
 	const location = useLocation();
 	const loging = {
 		linkName: 'Войти',
@@ -15,13 +15,13 @@ export default function Header() {
 			link: '/sign-up'
 	}
 		const Login = (props) => (
-				!loggedIn ? <Link className="header__authorization link"
+				!loggedIn ? <Link className="header__exit link"
 				                  to={props.logIn.link}>{props.logIn.linkName}</Link>
-			: <>
-					<p className="header__authorization link">{userInfo.email}</p>
-					<Link className="header__authorization link" to="/sign-in"
-					      onClick={signOut}>Выход</Link>
-				</>
+			: <div className="header__container">
+					<p className="header__authorization">{userInfo.email}</p>
+					<Link className="header__exit link" to="/sign-in"
+					      onClick={onSignOut}>Выход</Link>
+				</div>
 		)
 	return (
 			<>

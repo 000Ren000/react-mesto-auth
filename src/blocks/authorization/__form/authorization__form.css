@@ -1,0 +1,5 @@
+.authorization__form {
+    width: 100%;
+    display: grid;
+    grid-template-rows: 15% 60% 25%;
+}

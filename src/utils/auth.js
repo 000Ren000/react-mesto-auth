@@ -19,10 +19,7 @@ class Auth {
 				"email": email
 			})
 		})
-				.then(res => {
-					if (res.status === 400) return Promise.reject(`возможно неправильно введен email`);
-					this._checkResponse(res)
-				});
+				.then(res => this._checkResponse(res));
 	}
   // Вход
 	signIn(email, password) {

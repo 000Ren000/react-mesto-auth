@@ -8,11 +8,7 @@
     box-sizing: border-box;
 }
 
-.authorization__form {
-    width: 100%;
-    display: grid;
-    grid-template-rows: 15% 60% 25%;
-}
+
 
 .authorization__title {
     padding-top: 60px;
@@ -90,27 +86,6 @@
     .authorization {
         max-width: 260px;
     }
-
-    .authorization__form {
-    }
-
-    .authorization__title {
-    }
-
-    .authorization__inputs-container {
-
-    }
-    .authorization__input {
-
-    }
-    .authorization__input::placeholder {
-    }
-    .authorization__buttons-container {
-    }
-
-    .authorization__link {
-    }
-
 
     .authorization__button {
         min-height: 46px;

@@ -1,22 +1,18 @@
-.header__authorization {
+.header__exit {
     padding: 0;
     margin: 0;
-    justify-self: flex-end;
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
-
-
     text-align: right;
-
-    color: #FFFFFF;
+    text-decoration: none;
+    color: #A9A9A9;
 }
 
 @media screen and (max-width: 320px) {
-    .header__authorization {
+    .header__exit {
         margin-right: 30px;
         font-size: 14px;
         line-height: 17px;

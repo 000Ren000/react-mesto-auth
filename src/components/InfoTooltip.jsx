@@ -15,9 +15,9 @@ export default function InfoTooltip(props) {
 				</>
 				:
 				<>
-					<img src={imgResFalse} className="edit-form__image"/>
-					<h3 className="edit-form__message">`{'Что-то пошло не так!\n' +
-						'Попробуйте ещё раз.'}`</h3>
+					<img src={imgResFalse} className="edit-form__image" alt="Иконка доступа"/>
+					<h3 className="edit-form__message">{'Что-то пошло не так!\n' +
+						'Попробуйте ещё раз.'}</h3>
 					<button type="button" aria-label="Закрыть"
 					        className="popup__button-close link"
 					        onClick={onClose}

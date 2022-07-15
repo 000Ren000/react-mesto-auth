@@ -12,14 +12,16 @@ function App() {
 	return (
 			<AuthProvider>
 				<Routes>
+
 					<Route path="/" element={<Header />}>
+						<Route path="*" element={<Navigate to="/"/>}/>
 						<Route path="/" element={
 							<ProtectedRoute>
 								<HomePage/>
 							</ProtectedRoute>}/>
-						<Route path="sign-up" element={<Register/>}/>
 						<Route path="sign-in" element={<Login/>}/>
-						<Route path="*" element={<Navigate to="/"/>}/>
+						<Route path="sign-up" element={<Register/>}/>
+
 					</Route>
 
 				</Routes>

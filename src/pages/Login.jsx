@@ -7,7 +7,7 @@ import {useNavigate} from 'react-router-dom';
 export function Login() {
 
 	const navigate = useNavigate();
-	const {signIn} = useAuth();
+	const {onLogin} = useAuth();
 	const [acceptMessage, setAcceptMessage] = useState(false);
 	const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
 	const closePopup = () => {
@@ -24,7 +24,7 @@ export function Login() {
 				.then(({token}) => {
 					auth.checkToken(token)
 							.then(({data}) => {
-								signIn(data);
+								onLogin(data);
 								setAcceptMessage(true);
 								setIsInfoTooltipOpened(true);
 							})

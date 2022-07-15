@@ -5,6 +5,7 @@
   background-size: contain;
   margin-top: 45px;
   margin-bottom: 41px;
+  justify-self: flex-start;
 }
 
 @media screen and (max-width: 320px) {

@@ -11,7 +11,7 @@ export const AuthProvider = ({children}) => {
 	const JWT = localStorage.getItem('JWT');
 	const [userInfo, setUserInfo] = useState({_id: '', email: ''});
 	useEffect(() => {
-		if (!JWT) return;
+		if (!JWT) return navigate("/sign-in");
 		auth.checkToken(JWT)
 				.then(({data}) => {
 					setUserInfo(data);
@@ -19,20 +19,21 @@ export const AuthProvider = ({children}) => {
 				}).catch(err => {
 			console.log('Проблемы с авторизацией', err);
 		})
-	}, [])
-	const signIn = (newUser) => {
+	}, []);
+	const onLogin = (newUser) => {
 		setUserInfo(newUser);
 		setLoggedIn(true);
 	}
-	const signOut = () => {
+	const onSignOut = () => {
 		localStorage.removeItem('JWT');
 		setLoggedIn(false);
 	}
 	const value = {
 		userInfo,
 		loggedIn,
-		signIn,
-		signOut
+		onLogin,
+		onSignOut,
+		setLoggedIn
 	}
 	return <AuthContext.Provider value={value}>
 		{children}
