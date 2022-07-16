@@ -30,7 +30,7 @@ export function HomePage() {
 
 //Данные о пользователе
 	const [currentUser, setCurrentUser] = useState({
-		myID: '',
+		myId: '',
 		about: '',
 		avatar: '',
 		cohort: '',
