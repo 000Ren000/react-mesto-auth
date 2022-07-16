@@ -7,7 +7,6 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({children}) => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const navigate = useNavigate();
-	// useEffect(() => !loggedIn ? navigate("/sign-in") : navigate('/'), [loggedIn])
 	const JWT = localStorage.getItem('JWT');
 	const [userInfo, setUserInfo] = useState({_id: '', email: ''});
 	useEffect(() => {
