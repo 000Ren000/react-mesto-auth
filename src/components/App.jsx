@@ -14,14 +14,13 @@ function App() {
 				<Routes>
 
 					<Route path="/" element={<Header />}>
-						<Route path="*" element={<Navigate to="/"/>}/>
 						<Route path="/" element={
 							<ProtectedRoute>
 								<HomePage/>
 							</ProtectedRoute>}/>
 						<Route path="sign-in" element={<Login/>}/>
 						<Route path="sign-up" element={<Register/>}/>
-
+						<Route path="*" element={<Navigate to="/"/>}/>
 					</Route>
 
 				</Routes>
