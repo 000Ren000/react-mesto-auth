@@ -9,14 +9,16 @@ import ImagePopup from '../components/ImagePopup.jsx';
 import {useEffect, useState} from 'react';
 import {api} from '../utils/Api.js';
 import {useAuth} from '../utils/useAuth.js';
+import InfoTooltip from '../components/InfoTooltip.jsx';
 
 
 export function HomePage() {
-	const {loggedIn} = useAuth();
+	const {loggedIn, acceptMessage, changeAcceptMessageOpened, acceptMessageOpened} = useAuth();
 	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 	const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 	const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
+
 
 	const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
 	const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
@@ -74,6 +76,9 @@ export function HomePage() {
 		api.deleteCard(card._id).then(newCard => {setCards((state) => state.filter(c => c._id !== card._id))})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
+	const closeInfoTooltip =() => {
+		changeAcceptMessageOpened(false)
+	}
 	return (<CurrentUserContext.Provider value={currentUser}>
 		<div className='root'>
 			<Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
@@ -84,6 +89,10 @@ export function HomePage() {
 			<EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 			<PopupWithForm title="Вы уверены?" name='add-Form' onClose={closeAllPopups} buttonText="Да"/>
 			<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+			<InfoTooltip isOpen={acceptMessageOpened}
+			             typeMessage={acceptMessage}
+			             onClose={closeInfoTooltip}
+			/>
 		</div>
 	</CurrentUserContext.Provider>);
 }

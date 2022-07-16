@@ -9,6 +9,8 @@ export const AuthProvider = ({children}) => {
 	const navigate = useNavigate();
 	const JWT = localStorage.getItem('JWT');
 	const [userInfo, setUserInfo] = useState({_id: '', email: ''});
+	const [acceptMessage, setAcceptMessage] = useState(false);
+	const [acceptMessageOpened, setAcceptMessageOpened] = useState(false);
 	useEffect(() => {
 		if (!JWT) return navigate("/sign-in");
 		auth.checkToken(JWT)
@@ -27,11 +29,21 @@ export const AuthProvider = ({children}) => {
 		localStorage.removeItem('JWT');
 		setLoggedIn(false);
 	}
+	const changeAcceptMessage = (accept) => {
+		setAcceptMessage(accept);
+	}
+	const changeAcceptMessageOpened = (opened) => {
+		setAcceptMessageOpened(opened);
+	}
 	const value = {
 		userInfo,
 		loggedIn,
+		acceptMessage,
+		acceptMessageOpened,
+		changeAcceptMessageOpened,
 		onLogin,
 		onSignOut,
+		changeAcceptMessage,
 		setLoggedIn
 	}
 	return <AuthContext.Provider value={value}>
