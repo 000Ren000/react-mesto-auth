@@ -58,7 +58,7 @@ export function HomePage() {
 			));
 		})
 				.catch(err => console.log('что-то пошло не так', err));
-	}, []);
+	}, [loggedIn === true]);
 
 
 	function handleCardLike(card) {
