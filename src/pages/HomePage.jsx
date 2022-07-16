@@ -1,5 +1,4 @@
 import {CurrentUserContext} from '../contexts/CurrentUserContext.jsx';
-import Header from '../components/Header.jsx';
 import Main from '../components/Main.jsx';
 import Footer from '../components/Footer.jsx';
 import EditProfilePopup from '../components/EditProfilePopup.jsx';
@@ -9,10 +8,11 @@ import PopupWithForm from '../components/PopupWithForm.jsx';
 import ImagePopup from '../components/ImagePopup.jsx';
 import {useEffect, useState} from 'react';
 import {api} from '../utils/Api.js';
+import {useAuth} from '../utils/useAuth.js';
 
 
 export function HomePage() {
-
+	const {loggedIn} = useAuth();
 	const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 	const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
@@ -39,7 +39,7 @@ export function HomePage() {
 	useEffect(() => {
 		api.getUserInfo().then(setCurrentUser
 		).catch(err => console.log('что-то пошло не так', err));
-	}, []); 	//Получение данных о пользователе
+	}, [loggedIn === true]); 	//Получение данных о пользователе
 
 	const handleUpdateUser = (data) => {
 		api.setUserInfo(data).then(setCurrentUser)
