@@ -12,7 +12,6 @@ export function Login() {
 	const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
 	const closePopup = () => {
 		setIsInfoTooltipOpened(false);
-		if (acceptMessage) navigate("/");
 	}
 	const handleSubmit = (e) => {
 		e.preventDefault();
