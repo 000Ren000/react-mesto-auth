@@ -7,7 +7,7 @@ import EditAvatarPopup from '../components/EditAvatarPopup.jsx';
 import PopupWithForm from '../components/PopupWithForm.jsx';
 import ImagePopup from '../components/ImagePopup.jsx';
 import {useEffect, useState} from 'react';
-import {api} from '../utils/Api.js';
+import {api} from '../utils/api.js';
 import {useAuth} from '../utils/useAuth.js';
 import InfoTooltip from '../components/InfoTooltip.jsx';
 
