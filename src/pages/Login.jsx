@@ -25,8 +25,7 @@ export function Login() {
 					auth.checkToken(token)
 							.then(({data}) => {
 								onLogin(data);
-								setAcceptMessage(true);
-								setIsInfoTooltipOpened(true);
+								navigate("/");
 							})
 					localStorage.setItem('JWT', token);
 				}).catch(err => {
