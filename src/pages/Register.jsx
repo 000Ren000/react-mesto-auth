@@ -6,7 +6,7 @@ import InfoTooltip from '../components/InfoTooltip.jsx';
 
 
 export function Register() {
-	const {signIn} = useAuth();
+	const {onLogin} = useAuth();
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target;
@@ -15,7 +15,7 @@ export function Register() {
 
 		auth.signUp(email, password)
 				.then(({data}) => {
-					signIn(data)
+					onLogin(data)
 					setAcceptMessage(true);
 					setIsInfoTooltipOpened(true);
 				}).catch(err => {
