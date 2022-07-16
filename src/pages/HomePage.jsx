@@ -30,15 +30,10 @@ export function HomePage() {
 
 //Данные о пользователе
 	const [currentUser, setCurrentUser] = useState({
-		myId: '',
-		about: '',
-		avatar: '',
-		cohort: '',
-		name: ''
+		myId: '', about: '', avatar: '', cohort: '', name: ''
 	})
 	useEffect(() => {
-		api.getUserInfo().then(setCurrentUser
-		).catch(err => console.log('что-то пошло не так', err));
+		api.getUserInfo().then(setCurrentUser).catch(err => console.log('что-то пошло не так', err));
 	}, [loggedIn === true]); 	//Получение данных о пользователе
 
 	const handleUpdateUser = (data) => {
@@ -54,8 +49,7 @@ export function HomePage() {
 	const [cards, setCards] = useState([]);
 	useEffect(() => {
 		api.getCardInfo().then(data => {
-			setCards(data.map(item => ({...item, key: item._id})
-			));
+			setCards(data.map(item => ({...item, key: item._id})));
 		})
 				.catch(err => console.log('что-то пошло не так', err));
 	}, [loggedIn === true]);
@@ -67,62 +61,29 @@ export function HomePage() {
 
 		// Отправляем запрос в API и получаем обновлённые данные карточки
 		api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-			setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-		})
+			setCards((state) => state.map((c) => c._id === card._id ? newCard : c));})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
 	function handleAddPlaceSubmit(data) {
-		api.setNewCardInfo(data).then(newCard => {
-			setCards([newCard, ...cards])
-		})
+		api.setNewCardInfo(data).then(newCard => {setCards([newCard, ...cards])})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
 	function handleCardDelete(card) {
-		api.deleteCard(card._id).then(newCard => {
-			setCards((state) => state.filter(c => c._id !== card._id))
-		})
+		api.deleteCard(card._id).then(newCard => {setCards((state) => state.filter(c => c._id !== card._id))})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
-
-
-	return (
-			<CurrentUserContext.Provider value={currentUser}>
-				<div className='root'>
-
-					<Main onEditProfile={handleEditProfileClick}
-					      onAddPlace={handleAddPlaceClick}
-					      onEditAvatar={handleEditAvatarClick}
-					      onCardClick={setSelectedCard}
-					      cards={cards}
-					      onCardLike={handleCardLike}
-					      onCardDelete={handleCardDelete}
-					/>
-					<Footer/>
-					<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}
-					                  onUpdateUser={handleUpdateUser}
-					/>
-
-					<AddPlacePopup isOpen={isAddPlacePopupOpen}
-					               onClose={closeAllPopups}
-					               onAddPlace={handleAddPlaceSubmit}
-					/>
-
-					<EditAvatarPopup isOpen={isEditAvatarPopupOpen}
-					                 onClose={closeAllPopups}
-					                 onUpdateAvatar={handleUpdateAvatar}
-					/>
-
-
-					<PopupWithForm title="Вы уверены?" name='add-Form'
-					               onClose={closeAllPopups}
-					               buttonText="Да"
-					/>
-
-					<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-
-				</div>
-			</CurrentUserContext.Provider>
-	);
+	return (<CurrentUserContext.Provider value={currentUser}>
+		<div className='root'>
+			<Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
+			      onCardClick={setSelectedCard} cards={cards} onCardLike={handleCardLike} onCardDelete={handleCardDelete}/>
+			<Footer/>
+			<EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+			<AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit}/>
+			<EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
+			<PopupWithForm title="Вы уверены?" name='add-Form' onClose={closeAllPopups} buttonText="Да"/>
+			<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+		</div>
+	</CurrentUserContext.Provider>);
 }
