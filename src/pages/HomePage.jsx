@@ -34,9 +34,22 @@ export function HomePage() {
 	const [currentUser, setCurrentUser] = useState({
 		myId: '', about: '', avatar: '', cohort: '', name: ''
 	})
+
 	useEffect(() => {
-		api.getUserInfo().then(setCurrentUser).catch(err => console.log('что-то пошло не так', err));
-	}, [loggedIn === true]); 	//Получение данных о пользователе
+		if (loggedIn) {
+			api
+					.getUserInfo()
+					.then(setCurrentUser)
+					.catch((err) => console.log("что-то пошло не так", err));
+			api
+					.getCardInfo()
+					.then((data) => {
+						setCards(data.map((item) => ({ ...item, key: item._id })));
+					})
+					.catch((err) => console.log("что-то пошло не так", err));
+		}
+	}, [loggedIn]);
+
 
 	const handleUpdateUser = (data) => {
 		api.setUserInfo(data).then(setCurrentUser)
@@ -49,13 +62,6 @@ export function HomePage() {
 
 //Получение массива с карточками
 	const [cards, setCards] = useState([]);
-	useEffect(() => {
-		api.getCardInfo().then(data => {
-			setCards(data.map(item => ({...item, key: item._id})));
-		})
-				.catch(err => console.log('что-то пошло не так', err));
-	}, [loggedIn === true]);
-
 
 	function handleCardLike(card) {
 		// Снова проверяем, есть ли уже лайк на этой карточке
