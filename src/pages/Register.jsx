@@ -6,32 +6,35 @@ import InfoTooltip from '../components/InfoTooltip.jsx';
 
 
 export function Register() {
-	const {onLogin, acceptMessage, changeAcceptMessage, changeAcceptMessageOpened} = useAuth();
+	// const {onLogin, acceptMessage, changeAcceptMessage, changeAcceptMessageOpened} = useAuth();
 	const navigate = useNavigate();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const form = e.target;
 		const email = form.email.value
 		const password = form.password.value;
 
-		auth.signUp(email, password)
+		auth
+				.signUp(email, password)
 				.then(({data}) => {
-					onLogin(data);
-					navigate("/");
-					changeAcceptMessage(true);
-					changeAcceptMessageOpened(true);
-
-				}).catch(err => {
-			console.log('что-то пошло не так', err);
-			changeAcceptMessage(false);
-			setIsInfoTooltipOpened(true);
-		})
+					// onLogin(data);
+					setAcceptMessage(true);
+					setIsInfoTooltipOpened(true);
+				})
+				.catch(err => {
+					console.log('что-то пошло не так', err);
+					setAcceptMessage(false);
+					setIsInfoTooltipOpened(true);
+				})
 	}
 
-	// const [acceptMessage, setAcceptMessage] = useState(false);
+
+const [acceptMessage, setAcceptMessage] = useState(false);
 	const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
 	const closePopup = () => {
 		setIsInfoTooltipOpened(false);
+		navigate("/sign-in")
 	}
 	return (
 			<>
