@@ -33,13 +33,12 @@ export function Login() {
 		});
 	}
 
-
-
 	return (
 			<>
-				<InfoTooltip isOpen={isInfoTooltipOpened}
-				             typeMessage={acceptMessage}
-				             onClose={closePopup}
+				<InfoTooltip
+						isOpen={isInfoTooltipOpened}
+						typeMessage={acceptMessage}
+						onClose={closePopup}
 				/>
 				<div className="authorization">
 					<form action="src/pages/Login.jsx" className="authorization__form" onSubmit={handleSubmit}>
