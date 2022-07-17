@@ -34,7 +34,7 @@ const [acceptMessage, setAcceptMessage] = useState(false);
 	const [isInfoTooltipOpened, setIsInfoTooltipOpened] = useState(false);
 	const closePopup = () => {
 		setIsInfoTooltipOpened(false);
-		navigate("/sign-in")
+		if (acceptMessage) navigate("/sign-in");
 	}
 	return (
 			<>
