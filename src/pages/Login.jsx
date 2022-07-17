@@ -3,8 +3,6 @@ import {auth} from '../utils/auth.js';
 import InfoTooltip from '../components/InfoTooltip.jsx';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import Preloader from '../components/Preloader.jsx';
-
 
 export function Login() {
 	const navigate = useNavigate();
@@ -24,10 +22,10 @@ export function Login() {
 				.then(({token}) => {
 					auth.checkToken(token)
 							.then(({data}) => {
+								localStorage.setItem('JWT', token);
 								onLogin(data);
 								navigate("/");
 							})
-					localStorage.setItem('JWT', token);
 				}).catch(err => {
 			console.log('Вход не выполнен! Так как ', err);
 			setAcceptMessage(false);
@@ -43,7 +41,6 @@ export function Login() {
 				             typeMessage={acceptMessage}
 				             onClose={closePopup}
 				/>
-				<Preloader />
 				<div className="authorization">
 					<form action="src/pages/Login.jsx" className="authorization__form" onSubmit={handleSubmit}>
 						<div className="authorization__title">Вход</div>

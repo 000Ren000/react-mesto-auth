@@ -1,6 +1,7 @@
 import {createContext, useEffect, useState} from 'react';
 import {auth} from '../utils/auth.js';
 import {useNavigate} from 'react-router-dom';
+import Preloader from '../components/Preloader.jsx';
 
 export const AuthContext = createContext(null);
 
@@ -11,15 +12,20 @@ export const AuthProvider = ({children}) => {
 	const [userInfo, setUserInfo] = useState({_id: '', email: ''});
 	const [acceptMessage, setAcceptMessage] = useState(false);
 	const [acceptMessageOpened, setAcceptMessageOpened] = useState(false);
+	const [isTokenChecked, setIsTokenChecked] = useState(false)
 	useEffect(() => {
-		if (!JWT) return navigate("/sign-in");
+		if (!JWT) {
+			setIsTokenChecked(true)
+			return navigate("/sign-in");
+		}
+		setIsTokenChecked(false)
 		auth.checkToken(JWT)
 				.then(({data}) => {
 					setUserInfo(data);
 					setLoggedIn(true);
 				}).catch(err => {
 			console.log('Проблемы с авторизацией', err);
-		})
+		}).finally(() => setIsTokenChecked(true))
 	}, []);
 	const onLogin = (newUser) => {
 		setUserInfo(newUser);
@@ -47,6 +53,6 @@ export const AuthProvider = ({children}) => {
 		setLoggedIn
 	}
 	return <AuthContext.Provider value={value}>
-		{children}
+		{isTokenChecked ? children : <Preloader />}
 	</AuthContext.Provider>
 }
