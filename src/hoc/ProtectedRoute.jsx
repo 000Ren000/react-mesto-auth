@@ -3,7 +3,7 @@ import {useAuth} from '../utils/useAuth.js';
 
 
 function ProtectedRoute({children}) {
-	const {loggedIn} = useAuth();
+	const {loggedIn} = useAuth(); //получение глобальной переменной
 	if (loggedIn) return children;
 	else return <Navigate to="/sign-in"/>;
 }
