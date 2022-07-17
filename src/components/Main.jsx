@@ -2,18 +2,7 @@ import {useContext} from 'react';
 import Cards from './Card.jsx';
 import {CurrentUserContext} from '../contexts/CurrentUserContext.jsx';
 
-export default function Main(
-		{
-			onEditProfile,
-			onEditAvatar,
-			onAddPlace,
-			onCardClick,
-			cards,
-			onCardLike,
-			onCardDelete
-		}
-) {
-
+export default function Main({onEditProfile, onEditAvatar, onAddPlace, onCardClick, cards, onCardLike, onCardDelete}) {
 	const {
 		name: userName,
 		about: userDescription,

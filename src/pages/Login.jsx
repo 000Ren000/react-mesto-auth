@@ -3,9 +3,10 @@ import {auth} from '../utils/auth.js';
 import InfoTooltip from '../components/InfoTooltip.jsx';
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import Preloader from '../components/Preloader.jsx';
+
 
 export function Login() {
-
 	const navigate = useNavigate();
 	const {onLogin} = useAuth();
 	const [acceptMessage, setAcceptMessage] = useState(false);
@@ -42,6 +43,7 @@ export function Login() {
 				             typeMessage={acceptMessage}
 				             onClose={closePopup}
 				/>
+				<Preloader />
 				<div className="authorization">
 					<form action="src/pages/Login.jsx" className="authorization__form" onSubmit={handleSubmit}>
 						<div className="authorization__title">Вход</div>
