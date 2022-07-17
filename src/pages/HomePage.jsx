@@ -18,6 +18,7 @@ export function HomePage() {
 	const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 	const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 	const [selectedCard, setSelectedCard] = useState({name: '', link: ''});
+	const [cards, setCards] = useState([]);
 
 
 	const handleEditAvatarClick = () => setEditAvatarPopupOpen(true);
@@ -44,7 +45,7 @@ export function HomePage() {
 			api
 					.getCardInfo()
 					.then((data) => {
-						setCards(data.map((item) => ({ ...item, key: item._id })));
+						setCards(data.map((item) => ({...item, key: item._id})));
 					})
 					.catch((err) => console.log("что-то пошло не так", err));
 		}
@@ -52,39 +53,42 @@ export function HomePage() {
 
 
 	const handleUpdateUser = (data) => {
-		api.setUserInfo(data).then(setCurrentUser)
+		api
+				.setUserInfo(data)
+				.then(setCurrentUser)
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 	const handleUpdateAvatar = (data) => {
-		api.changeAvatar(data.avatar).then(setCurrentUser)
+		api
+				.changeAvatar(data.avatar)
+				.then(setCurrentUser)
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
-//Получение массива с карточками
-	const [cards, setCards] = useState([]);
 
 	function handleCardLike(card) {
-		// Снова проверяем, есть ли уже лайк на этой карточке
 		const isLiked = card.likes.some(i => i._id === currentUser._id);
-
-		// Отправляем запрос в API и получаем обновлённые данные карточки
-		api.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-			setCards((state) => state.map((c) => c._id === card._id ? newCard : c));})
+		api
+				.changeLikeCardStatus(card._id, isLiked)
+				.then((newCard) => {setCards((state) => state.map((c) => c._id === card._id ? newCard : c));})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
 	function handleAddPlaceSubmit(data) {
-		api.setNewCardInfo(data).then(newCard => {setCards([newCard, ...cards])})
+		api
+				.setNewCardInfo(data)
+				.then(newCard => {setCards([newCard, ...cards])})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
 
 	function handleCardDelete(card) {
-		api.deleteCard(card._id).then(newCard => {setCards((state) => state.filter(c => c._id !== card._id))})
+		api
+				.deleteCard(card._id)
+				.then(newCard => {setCards((state) => state.filter(c => c._id !== card._id))})
 				.catch(err => console.log('что-то пошло не так', err));
 	}
-	const closeInfoTooltip =() => {
-		changeAcceptMessageOpened(false)
-	}
+
+	const closeInfoTooltip = () => changeAcceptMessageOpened(false)
 	return (<CurrentUserContext.Provider value={currentUser}>
 		<div className='root'>
 			<Main onEditProfile={handleEditProfileClick} onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick}
@@ -95,10 +99,7 @@ export function HomePage() {
 			<EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
 			<PopupWithForm title="Вы уверены?" name='add-Form' onClose={closeAllPopups} buttonText="Да"/>
 			<ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-			<InfoTooltip isOpen={acceptMessageOpened}
-			             typeMessage={acceptMessage}
-			             onClose={closeInfoTooltip}
-			/>
+			<InfoTooltip isOpen={acceptMessageOpened} typeMessage={acceptMessage} onClose={closeInfoTooltip}/>
 		</div>
 	</CurrentUserContext.Provider>);
 }
