@@ -91,6 +91,6 @@ class Api {
 
 // Создание Апи
 export const api = new Api({
-	baseURL: 'https://nomoreparties.co/v1/cohort-41',
+	baseURL: 'https://api.mesto.antonren.ru',
 	headers: key
 });

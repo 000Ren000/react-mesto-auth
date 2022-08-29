@@ -55,7 +55,7 @@ class Auth {
 
 // Создание Апи
 export const auth = new Auth({
-	baseURL: 'https://auth.nomoreparties.co',
+	baseURL: 'https://api.mesto.antonren.ru/',
 	headers: {
 		'Content-Type': 'application/json'
 	}
