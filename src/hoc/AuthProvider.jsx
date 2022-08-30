@@ -9,7 +9,6 @@ export const AuthProvider = ({children}) => {
 	const [loggedIn, setLoggedIn] = useState(false);
 	const navigate = useNavigate();
 	const JWT = localStorage.getItem('JWT');
-	const [token, setToken] = useState('');
 	const [userInfo, setUserInfo] = useState({_id: '', email: ''});
 	const [acceptMessage, setAcceptMessage] = useState(false);
 	const [acceptMessageOpened, setAcceptMessageOpened] = useState(false);
@@ -24,15 +23,17 @@ export const AuthProvider = ({children}) => {
 				.then((data) => {
 					setUserInfo(data);
 					setLoggedIn(true);
-					setToken(JWT);
 				}).catch(err => {
 			console.log('Проблемы с авторизацией', err);
-			setToken('');
 		}).finally(() => setIsTokenChecked(true))
 	}, []);
 	const onLogin = (newUser) => {
+		console.log('old:', userInfo);
+		console.log('after:', newUser);
+		setUserInfo(newUser);
 		setUserInfo(newUser);
 		setLoggedIn(true);
+		console.log('userInfo', userInfo);
 	}
 	const onSignOut = () => {
 		localStorage.removeItem('JWT');
@@ -54,7 +55,6 @@ export const AuthProvider = ({children}) => {
 		onSignOut,
 		changeAcceptMessage,
 		setLoggedIn,
-		token
 	}
 	return <AuthContext.Provider value={value}>
 		{isTokenChecked ? children : <Preloader />}

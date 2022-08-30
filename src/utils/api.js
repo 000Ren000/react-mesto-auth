@@ -1,10 +1,17 @@
-import {key, linkApi} from './utils.js';
+import {linkApi} from './utils.js';
+
 
 class Api {
 	constructor(option) {
 		this._baseURL = option.baseURL;
-		this._headers = option.headers;
 	}
+
+	_getHeaderForToken() {
+		return {
+			Authorization: `Bearer ${localStorage.getItem('JWT')}`,
+			'Content-Type': 'application/json'
+		};
+	};
 
 	_checkResponse(res) {
 		if (res.ok) return res.json();
@@ -14,7 +21,7 @@ class Api {
 	getUserInfo() {
 		return fetch(this._baseURL + '/users/me', {
 			method: 'GET',
-			headers: this._headers
+			headers: this._getHeaderForToken()
 		})
 				.then(res => this._checkResponse(res)).then(data => data);
 	}
@@ -22,7 +29,7 @@ class Api {
 	getCardInfo() {
 		return fetch(this._baseURL + '/cards', {
 			method: 'GET',
-			headers: this._headers
+			headers: this._getHeaderForToken()
 		})
 				.then(res => this._checkResponse(res));
 	}
@@ -30,7 +37,7 @@ class Api {
 	setUserInfo({name, about}) {
 		return fetch(this._baseURL + '/users/me', {
 			method: 'PATCH',
-			headers: this._headers,
+			headers: this._getHeaderForToken(),
 			body: JSON.stringify({
 				"name": name,
 				"about": about
@@ -42,7 +49,7 @@ class Api {
 	changeAvatar(avatar) {
 		return fetch(this._baseURL + `/users/me/avatar`, {
 			method: 'PATCH',
-			headers: this._headers,
+			headers: this._getHeaderForToken(),
 			body: JSON.stringify({
 				"avatar": avatar,
 			})
@@ -52,7 +59,7 @@ class Api {
 	setNewCardInfo({name, link}) {
 		return fetch(this._baseURL + '/cards', {
 			method: 'POST',
-			headers: this._headers,
+			headers: this._getHeaderForToken(),
 			body: JSON.stringify({
 				"name": name,
 				"link": link
@@ -64,21 +71,21 @@ class Api {
 	deleteCard(cardId) {
 		return fetch(this._baseURL + `/cards/${cardId}`, {
 			method: 'DELETE',
-			headers: this._headers
+			headers: this._getHeaderForToken()
 		}).then(res => this._checkResponse(res));
 	}
 
 	_likedCard(cardId) {
 		return fetch(this._baseURL + `/cards/${cardId}/likes`, {
 			method: 'PUT',
-			headers: this._headers
+			headers: this._getHeaderForToken()
 		}).then(res => this._checkResponse(res));
 	}
 
 	_unlikedCard(cardId) {
 		return fetch(this._baseURL + `/cards/${cardId}/likes`, {
 			method: 'DELETE',
-			headers: this._headers
+			headers: this._getHeaderForToken()
 		}).then(res => this._checkResponse(res));
 	}
 
@@ -90,6 +97,5 @@ class Api {
 
 // Создание Апи
 export const api = new Api({
-	baseURL: linkApi,
-	headers: key
+	baseURL: linkApi
 });

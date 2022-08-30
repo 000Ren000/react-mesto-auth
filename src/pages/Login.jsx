@@ -20,7 +20,6 @@ export function Login() {
 
 		auth.signIn(email, password)
 				.then(({token}) => {
-					console.log('email:', email, 'password', password, 'token', token);
 					auth.checkToken(token)
 							.then((data) => {
 								localStorage.setItem('JWT', token);
