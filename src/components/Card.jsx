@@ -15,11 +15,11 @@ export default function Card (props) {
 	}
 	const currentUser = useContext(CurrentUserContext);
 	// Определяем, являемся ли мы владельцем текущей карточки
-	const isOwn = owner._id === currentUser._id;
+	const isOwn = owner === currentUser._id;
 	const cardDeleteButtonClassName = (`card__trash ${isOwn ? '' : 'card__trash_hidden'}`);
 
 	//Проверка на наш лайк
-	const isLiked = props.card.likes.some(likes => likes._id === currentUser._id);
+	const isLiked = props.card.likes.some(likes => likes === currentUser._id);
 
 	return (
 				<li className="card">
