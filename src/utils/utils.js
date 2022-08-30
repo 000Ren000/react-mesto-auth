@@ -11,4 +11,5 @@ export const key = {
   'Content-Type': 'application/json'
 }
 
-export const linkApi = 'http://localhost:3000'
+// export const linkApi = 'http://localhost:3000'
+export const linkApi = 'https://api.mesto.antonren.ru';
