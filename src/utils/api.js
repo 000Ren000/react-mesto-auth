@@ -1,4 +1,4 @@
-import {key} from './utils.js';
+import {key, linkApi} from './utils.js';
 
 class Api {
 	constructor(option) {
@@ -16,7 +16,7 @@ class Api {
 			method: 'GET',
 			headers: this._headers
 		})
-				.then(res => this._checkResponse(res)).then(data => data)
+				.then(res => this._checkResponse(res)).then(data => data);
 	}
 
 	getCardInfo() {
@@ -88,9 +88,8 @@ class Api {
 	}
 }
 
-
 // Создание Апи
 export const api = new Api({
-	baseURL: 'https://nomoreparties.co/v1/cohort-41',
+	baseURL: linkApi,
 	headers: key
 });

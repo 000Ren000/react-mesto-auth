@@ -7,6 +7,8 @@ export const param = {
   errorClass: 'popup__error_visible'
 };
 export const key = {
-  authorization: '2e1e6251-c43e-48e5-b292-2b34f8f03df1',
+  authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZhMTA5MGNlNGJlNmFmOTdkM2QyOGQiLCJpYXQiOjE2NjE4MTk4NDUsImV4cCI6MTY2MjQyNDY0NX0.Z3TaLldd0Y5ixihFikqDsJ1gUneaVYRyXpLutpJ6jEw',
   'Content-Type': 'application/json'
 }
+
+export const linkApi = 'http://localhost:3000'

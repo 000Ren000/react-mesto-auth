@@ -1,3 +1,5 @@
+import {linkApi} from './utils';
+
 class Auth {
 	constructor(option) {
 		this._baseURL = option.baseURL;
@@ -55,7 +57,7 @@ class Auth {
 
 // Создание Апи
 export const auth = new Auth({
-	baseURL: 'https://auth.nomoreparties.co',
+	baseURL: linkApi,
 	headers: {
 		'Content-Type': 'application/json'
 	}
